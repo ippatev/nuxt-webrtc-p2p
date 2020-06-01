@@ -1,4 +1,4 @@
-# create-webrtc
+# nuxt-webrtc-app
 
 > My doozie Nuxt.js project
 

@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background-color: #A8C7AB">
+  <v-app style="background-color: wheat">
     <v-app-bar
       :clipped-left="clipped"
       fixed

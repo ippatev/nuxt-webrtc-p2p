@@ -22,8 +22,7 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap'}
     ],
     script: [
-      { type: 'text/javascript', src: 'https://cdn.scaledrone.com/scaledrone.min.js' },
-      { type: 'text/javascript', src: 'http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' }
+      { type: 'text/javascript', src: 'https://cdn.scaledrone.com/scaledrone.min.js' }
     ]
   },
   /*

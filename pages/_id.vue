@@ -1,30 +1,8 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">
-      {{ snackbar.message }}
-    </v-snackbar>
-
-    <v-container class="grey lighten-5">
-      <v-row no-gutters>
-        <v-col
-          cols="12"
-          sm="6"
-        >
-          <video id="localVideo" autoplay muted />
-        </v-col>
-        <v-col
-          cols="12"
-          sm="6"
-        >
-          <video id="remoteVideo" autoplay />
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-layout>
+  <div class="content">
+    <video class="content__video-local" id="localVideo" autoplay muted />
+    <video class="content__video-remote" id="remoteVideo" autoplay />
+  </div>
 </template>
 
 <script>
@@ -237,3 +215,34 @@ export default {
   }
 }
 </script>
+
+<style>
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .content__video-local {
+    width: 50%;
+    height: 50%;
+    bottom: 0;
+    align-self: flex-end;
+    position: absolute;
+  }
+
+  @media (max-width: 768px) {
+    .content__video-local {
+      align-self: center;
+    }
+  }
+
+  .content__video-remote {
+    width: 100%;
+    height: 100%;
+  }
+</style>

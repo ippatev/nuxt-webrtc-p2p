@@ -10,17 +10,11 @@
 export default {
   data () {
     return {
-      text: 'Text',
       pc: null,
       room: null,
       configuration: '',
       drone: null,
-      observableId: null,
-      snackbar: {
-        show: false,
-        message: '',
-        timeout: 1000
-      }
+      observableId: null
     }
   },
   async mounted () {
@@ -31,11 +25,6 @@ export default {
 
     try {
       const stream = await openMediaDevices({ 'video': true, 'audio': true })
-      this.snackbar = {
-        show: true,
-        message: 'openMediaDevices video and audio',
-        timeout: 1000
-      }
 
       console.log('openMediaDevices video and audio: ', stream)
 
@@ -58,17 +47,7 @@ export default {
         }
         this.room = this.drone.subscribe(this.observableId)
         this.room.on('open', (error) => {
-          this.snackbar = {
-            show: true,
-            message: 'opened websocket room',
-            timeout: 1000
-          }
           if (error) {
-            this.snackbar = {
-              show: true,
-              message: 'error on open websocket room',
-              timeout: 1000
-            }
             this.onError(error)
           }
         })
@@ -79,20 +58,10 @@ export default {
           // If we are the second user to connect to the room we will be creating the offer
           const isOfferer = members.length === 2
           this.startWebRTC(isOfferer)
-          this.snackbar = {
-            show: true,
-            message: 'members on start WebRTC connection: ' + members.length,
-            timeout: 1000
-          }
           console.log('members on start WebRTC connection: ', members)
         })
       })
     } catch (error) {
-      this.snackbar = {
-        show: true,
-        message: 'Error accessing media devices. ' + error,
-        timeout: 1000
-      }
       console.error('Error accessing media devices.', error)
     }
   },
@@ -102,12 +71,6 @@ export default {
         room: this.observableId,
         message
       })
-
-      this.snackbar = {
-        show: true,
-        message: 'message sended on websocket room: ' + message,
-        timeout: 1000
-      }
     },
     async startWebRTC (isOfferer) {
       // eslint-disable-next-line no-undef,prefer-const
@@ -120,11 +83,6 @@ export default {
         console.log('onicecandidate', event)
         if (event.candidate) {
           console.log('ICE Candidate: ' + event.candidate)
-          this.snackbar = {
-            show: true,
-            message: 'ICE Candidate: ' + event.candidate,
-            timeout: 1000
-          }
           this.sendMessage({ 'candidate': event.candidate })
         }
       }
@@ -178,21 +136,11 @@ export default {
             new RTCIceCandidate(message.candidate), this.onSuccess, this.onError
           )
           console.log('addIceCandidate on candidate: ', message.candidate)
-          this.snackbar = {
-            show: true,
-            message: 'addIceCandidate on candidate: ' + message.candidate,
-            timeout: 1000
-          }
         }
       })
     },
     onSuccess (result) {
       console.log('success', result)
-      this.snackbar = {
-        show: true,
-        message: 'success' + result,
-        timeout: 1000
-      }
     },
     onError (error) {
       console.error(error)
@@ -206,11 +154,6 @@ export default {
       // eslint-disable-next-line no-console
       console.log('local desc: ', desc)
       console.log('sended sdp: ', this.pc.localDescription)
-      this.snackbar = {
-        show: true,
-        message: 'sended sdp: ' + this.pc.localDescription,
-        timeout: 1000
-      }
     }
   }
 }

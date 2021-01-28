@@ -1,7 +1,5 @@
 # nuxt-webrtc-app
 
-> My doozie Nuxt.js project
-
 ## Build Setup
 
 ``` bash
